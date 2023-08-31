@@ -28,6 +28,7 @@ class WordsInStudy(Base):
     
     id = sq.Column(sq.Integer, primary_key=True, autoincrement=True)
     correct_guesses = sq.Column(sq.Integer)
+    
     word_id = sq.Column(sq.Integer, sq.ForeignKey(BasicWords.id))
     user_id = sq.Column(sq.Integer, sq.ForeignKey(Users.id))
     
@@ -38,6 +39,7 @@ class StudiedWords(Base):
     __tablename__ = 'StudiedWords'
     
     id = sq.Column(sq.Integer, primary_key=True, autoincrement=True)
+    
     word_id = sq.Column(sq.Integer, sq.ForeignKey(BasicWords.id))
     user_id = sq.Column(sq.Integer, sq.ForeignKey(Users.id))
     

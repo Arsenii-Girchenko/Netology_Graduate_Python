@@ -12,7 +12,7 @@ from funClasses import add_row_to_table, InitialValues
 from tg_bot_funcs import *
 
 
-TG_TOKEN = '5915102486:AAH4hXOms9V0cojJLfYRMDrzaNboxOfZRIM'
+TG_TOKEN = ''
 FREE_DICT_API_HOST = 'https://api.dictionaryapi.dev/api/v2/entries/en'
 
 DBMS_name = 'postgresql'
@@ -20,7 +20,6 @@ username = 'postgres'
 password = 'postgres'
 db_name = 'en_words_db'
 
-# https://ru.stackoverflow.com/questions/1504204/Как-запустить-телеграм-бота-из-импортированной-библиотеки
 
 def start_program(bot, session):
     
@@ -47,10 +46,6 @@ def start_program(bot, session):
     @bot.message_handler(commands=['mywords'])
     def show_my_words_bot(message):
         show_my_words(bot, message, session)
-    
-    @bot.message_handler(commands=['stop'])
-    def stop_bot(message):
-        bot.stop_bot()
     
     @bot.message_handler(func=lambda message: True, content_types=['text'])
     def user_choice_reply_bot(message):

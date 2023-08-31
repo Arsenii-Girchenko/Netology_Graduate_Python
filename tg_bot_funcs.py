@@ -12,7 +12,6 @@ from db_classes import *
 from funClasses import *
 from API_funcs import *
 
-TG_TOKEN = '5915102486:AAH4hXOms9V0cojJLfYRMDrzaNboxOfZRIM'
 FREE_DICT_API_HOST = 'https://api.dictionaryapi.dev/api/v2/entries/en'
 
 state_storage = StateMemoryStorage()

@@ -1,9 +1,7 @@
 import json
 import requests
 
-FREE_DICT_API_HOST = 'https://api.dictionaryapi.dev/api/v2/entries/en'
-
-def get_use_example(word, dictionary_api_url=FREE_DICT_API_HOST):
+def get_use_example(word, dictionary_api_url):
     url = dictionary_api_url
     example_list = []
     req_url = f'{url}/{str(word)}'
