@@ -10,6 +10,9 @@ class BasicWords(Base):
     id = sq.Column(sq.Integer, primary_key=True, autoincrement=True)
     en_word = sq.Column(sq.String(length=34), unique=True)
     ru_word = sq.Column(sq.String(length=37))
+    
+    word_in_study = relationship("WordsInStudy", back_populates="word")
+    studied_word = relationship("StudiedWords", back_populates="word")
 
 class Users(Base):
     __tablename__ = 'Users'
@@ -24,21 +27,21 @@ class WordsInStudy(Base):
     __tablename__ = 'WordsInStudy'
     
     id = sq.Column(sq.Integer, primary_key=True, autoincrement=True)
-    en_word = sq.Column(sq.String(length=34), unique=True)
-    ru_word = sq.Column(sq.String(length=37))
     correct_guesses = sq.Column(sq.Integer)
+    word_id = sq.Column(sq.Integer, sq.ForeignKey(BasicWords.id))
     user_id = sq.Column(sq.Integer, sq.ForeignKey(Users.id))
     
     user = relationship("Users", back_populates="word_in_study")
-        
+    word = relationship("BasicWords", back_populates="word_in_study")
+
 class StudiedWords(Base):
     __tablename__ = 'StudiedWords'
     
     id = sq.Column(sq.Integer, primary_key=True, autoincrement=True)
-    en_word = sq.Column(sq.String(length=34), unique=True)
-    ru_word = sq.Column(sq.String(length=37))
-    id_users = sq.Column(sq.Integer, sq.ForeignKey(Users.id))
+    word_id = sq.Column(sq.Integer, sq.ForeignKey(BasicWords.id))
+    user_id = sq.Column(sq.Integer, sq.ForeignKey(Users.id))
     
+    word = relationship("BasicWords", back_populates="studied_word")
     user = relationship("Users", back_populates="studied_word")
 
 def create_db(username, password, db_name):
@@ -50,10 +53,10 @@ def create_db(username, password, db_name):
     finally:
         if connection:
             connection.close()
-            return print('Database created')  
+            return print('Database created')
 
 def create_tables(engine):
     Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
-    print('tables created') 
-
+    print('tables created')
+    return
